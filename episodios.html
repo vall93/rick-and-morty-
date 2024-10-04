@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="episodes-container"></div>
+          
+    <script>
+        const episodesContainer = document.getElementById('episodes-container');
+          
+        // Realizar solicitud a la API
+        fetch('https://rickandmortyapi.com/api/episode')
+        .then(response => response.json())
+        .then(data => {
+        // Procesar los datos y mostrarlos en el contenedor
+        const episodes = data.results;
+            episodes.forEach(episode => {
+        const episodeDiv = document.createElement('div');
+            episodeDiv.innerHTML = `
+                <h2>${episode.name}</h2>
+                <p>Episodio: ${episode.episode}</p>
+                <p>Fecha de emisión: ${episode.air_date}</p>`;
+                    episodesContainer.appendChild(episodeDiv);
+                  });
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                });
+    </script>
+<script src="app.js"></script>
+</body>
+</html>
